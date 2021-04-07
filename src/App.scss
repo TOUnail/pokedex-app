@@ -1,0 +1,25 @@
+@mixin glass($color, $opacity, $blur) {
+    background: rgba( $color, $opacity );
+    // box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( $blur );
+    -webkit-backdrop-filter: blur( $blur );
+    // border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+@import "../node_modules/bootstrap";
+
+body {
+    min-height: 100vh;
+    // width: 100%;
+    background: rgb(182,173,201);
+background: linear-gradient(90deg, rgba(182,173,201,0.7) 0%, rgba(187,226,220,1) 7%, rgba(196,232,184,1) 100%);
+     background-repeat: no-repeat;
+}
+
+.header {
+    @include glass(#fff, 0.2, 5px)
+}
+
+.text-glass-dark {
+    color: #3b4743;
+}
