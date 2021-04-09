@@ -16,10 +16,14 @@ background: linear-gradient(90deg, rgba(182,173,201,0.7) 0%, rgba(187,226,220,1)
      background-repeat: no-repeat;
 }
 
-.header {
+.header, .footer {
     @include glass(#fff, 0.2, 5px)
 }
 
 .text-glass-dark {
     color: #3b4743;
+}
+
+.input-search {
+    @include glass(#ccc, 0.8, 5px)
 }
