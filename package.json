@@ -6,11 +6,14 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^4.6.0",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.0-beta3",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "swr": "^0.5.5",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -40,5 +43,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "Alex Tou",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@welldone-software/why-did-you-render": "^6.1.1"
+  }
 }
