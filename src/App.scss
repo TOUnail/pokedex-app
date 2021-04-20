@@ -12,22 +12,11 @@
 }
 body {
     min-height: 100vh;
-    padding-top: 97px;
-    padding-bottom: 53px;
     background: rgb(182,173,201);
 background: linear-gradient(90deg, rgba(182,173,201,0.7) 0%, rgba(187,226,220,1) 7%, rgba(196,232,184,1) 100%);
      background-repeat: no-repeat;
 }
 
-.header, .footer {
-    @include glass(#fff, 0.2, 5px)
-}
-
-.header {
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-image: linear-gradient(to right, #40e0d0,#ff8c00, #ff0080) 1;
-}
 
 .pokemon-card {
     @include glass(#fff, 0.8, 5px);
@@ -35,18 +24,4 @@ background: linear-gradient(90deg, rgba(182,173,201,0.7) 0%, rgba(187,226,220,1)
     @media (min-width: 768px) {
         border: 0;
     }
-}
-
-.footer {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-image: linear-gradient(to left, #40e0d0,#ff8c00, #ff0080) 1;
-}
-
-.text-glass-dark {
-    color: #3b4743;
-}
-
-.input-search {
-    @include glass(#ccc, 0.8, 5px)
 }

@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === "development") {
   whyDidYouRender(React, {
     onlyLogs: true,
     titleColor: "green",
-    diffNameColor: "darkturquoise",
+    diffNameColor: "red",
     include: [/[A-za-z]/],
   });
 }
