@@ -10,7 +10,24 @@ import {
 
 const Stats = ({ data }) => {
   const formatStatName = (s) => {
-    return s.charAt(0).toUpperCase() + s.slice(1);
+    //let name = ""
+    switch (s) {
+      case "hp":
+        return "HP";
+      case "attack":
+        return "Attack";
+      case "defense":
+        return "Defense";
+      case "special-attack":
+        return "Sp Atk";
+      case "special-defense":
+        return "Sp Def";
+      case "speed":
+        return "Speed";
+      default:
+        return null;
+    }
+    // return s.charAt(0).toUpperCase() + s.slice(1);
   };
   const chartData = data.map((stat) => ({
     stat: formatStatName(stat.stat.name),
@@ -20,19 +37,13 @@ const Stats = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={500}>
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
-        <PolarGrid stroke="#666" />
-        <PolarAngleAxis
-          dataKey="stat"
-          stroke="#666"
-          scaleToFit={true}
-          width={15}
-        />
+        <PolarGrid stroke="#aaa" />
+        <PolarAngleAxis dataKey="stat" strokeOpacity={0.01} stroke="#666" />
 
-        <PolarRadiusAxis stroke="#666" angle={30} />
+        <PolarRadiusAxis stroke="#aaa" angle={30} />
         <Radar
           name="baseStat"
           dataKey="value"
-          stroke="#8884d8"
           fill="#8884d8"
           fillOpacity={0.6}
           isAnimationActive={false}

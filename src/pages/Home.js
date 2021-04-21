@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Header from "../components/home/Header";
 import Footer from "../components/home/Footer";
 import PokemonCard from "../components/home/PokemonCard";

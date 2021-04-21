@@ -1,6 +1,7 @@
 import React from "react";
 import Stats from "../components/pokemon/Stats";
-import Type from "../components/Types";
+import Abilities from "../components/pokemon/Abilities";
+// import Type from "../components/Types";
 
 import { useRequest } from "../hooks/useRequest";
 import "../components/pokemon/Pokemon.scss";
@@ -72,9 +73,18 @@ const Pokemon = (props) => {
           </div>
         </div>
         {/* Start Stats */}
-        <div className="row">
+        <div className="row row-cols-1 row-cols-md-2">
           <div className="col">
+            <h3>Base Stats</h3>
             <Stats data={data1.stats} />
+          </div>
+          <div className="col">
+            <h3>Abilities</h3>
+
+            {data1.abilities.map((ability) => (
+              <Abilities key={ability.ability.url} data={ability} />
+              // <p key={ability.ability.url}>{ability.ability.name}</p>
+            ))}
           </div>
         </div>
         {/* End Stats */}
