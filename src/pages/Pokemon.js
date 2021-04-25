@@ -1,7 +1,8 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
-// import Type from "../components/Types";
+import Types from "../components/Types";
 
 import { useRequest } from "../hooks/useRequest";
 import "../components/pokemon/Pokemon.scss";
@@ -9,6 +10,15 @@ import "../components/pokemon/Pokemon.scss";
 // https://codesandbox.io/s/rmloxx60q4?file=/src/index.js
 const Pokemon = (props) => {
   const name = props.match.params.name;
+  let history = useHistory();
+  console.log(history.length);
+  const prevPage = () => {
+    if (history.length > 2) {
+      history.goBack();
+    } else {
+      history.push("/");
+    }
+  };
   const { data: data1, error: error1 } = useRequest("/pokemon", name);
   const { data: data2, error: error2 } = useRequest("/pokemon-species", name);
   if (error1 || error2) return <p>Something went wrong.</p>;
@@ -17,15 +27,15 @@ const Pokemon = (props) => {
     const newText = text.replace("\n", " ").replace("\f", " ");
     return newText;
   };
-  console.log(data1);
-  console.log(data2);
+  // console.log(data1);
+  // console.log(data2);
   return (
     <>
       <div className={`masthead ${data1.types[0].type.name}`}>
         <div className="container">
           <header className="row align-items-center justify-content-between">
             <div className="col">
-              <button className="btn btn-link p-0">
+              <button onClick={() => prevPage()} className="btn btn-link p-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
@@ -44,7 +54,10 @@ const Pokemon = (props) => {
                 <p className="mb-0 text-muted">
                   #{data1.id.toLocaleString("en", { minimumIntegerDigits: 3 })}
                 </p>
-                <h1 className="mb-0 ms-2 text-capitalize">{name}</h1>
+                <div className="d-flex flex-column align-items-end">
+                  <h1 className="mb-0 ms-2 text-capitalize">{name}</h1>
+                  <Types keyName={name} type={data1.types} />
+                </div>
               </div>
             </div>
           </header>
@@ -65,11 +78,22 @@ const Pokemon = (props) => {
       <div className="container">
         <div className="row">
           <div className="col text-center">
-            <p
+            {data2.flavor_text_entries
+              .filter((entry) => entry.language.name === "en")
+              .filter((version) => version.version.name === "red")
+              .map((text) => (
+                <p
+                  key={text.version.name}
+                  dangerouslySetInnerHTML={{
+                    __html: newLineText(text.flavor_text),
+                  }}
+                />
+              ))}
+            {/* <p
               dangerouslySetInnerHTML={{
                 __html: newLineText(data2.flavor_text_entries[0].flavor_text),
               }}
-            />
+            /> */}
           </div>
         </div>
         {/* Start Stats */}
@@ -83,7 +107,6 @@ const Pokemon = (props) => {
 
             {data1.abilities.map((ability) => (
               <Abilities key={ability.ability.url} data={ability} />
-              // <p key={ability.ability.url}>{ability.ability.name}</p>
             ))}
           </div>
         </div>
