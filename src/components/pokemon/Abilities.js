@@ -9,7 +9,9 @@ const Abilities = (props) => {
   return (
     <div className="card my-2">
       <div className="card-body">
-        <p className="text-capitalize">{props.data.ability.name}</p>
+        <p className="text-capitalize">
+          <strong>{props.data.ability.name}</strong>
+        </p>
         {data.effect_entries
           .filter((entry) => entry.language.name === "en")
           .map((desc) => (

@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import Speech from "speak-tts";
 import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
 import Types from "../components/Types";
@@ -10,8 +11,13 @@ import "../components/pokemon/Pokemon.scss";
 // https://codesandbox.io/s/rmloxx60q4?file=/src/index.js
 const Pokemon = (props) => {
   const name = props.match.params.name;
+  const speech = new Speech();
+  speech.init({
+    volume: 0.5,
+    lang: "en-GB",
+    voice: "Google UK English Male",
+  });
   let history = useHistory();
-  console.log(history.length);
   const prevPage = () => {
     if (history.length > 2) {
       history.goBack();
@@ -23,9 +29,22 @@ const Pokemon = (props) => {
   const { data: data2, error: error2 } = useRequest("/pokemon-species", name);
   if (error1 || error2) return <p>Something went wrong.</p>;
   if (!data1 || !data2) return null;
+  let genus = data2.genera
+    .filter((entry) => entry.language.name === "en")
+    .map((text) => text.genus);
+  let exerpt = data2.flavor_text_entries
+    .filter((entry) => entry.language.name === "en")
+    .map((text) => text.flavor_text);
   const newLineText = (text) => {
     const newText = text.replace("\n", " ").replace("\f", " ");
     return newText;
+  };
+  const onClickSpeak = () => {
+    speech
+      .speak({
+        text: `${name}, a ${genus[0]}. ${exerpt[0]}`,
+      })
+      .catch((e) => console.log("error:", e));
   };
   // console.log(data1);
   // console.log(data2);
@@ -70,25 +89,42 @@ const Pokemon = (props) => {
                 src={data1.sprites["front_default"]}
                 alt={name}
                 style={{ imageRendering: "pixelated" }}
+                onClick={onClickSpeak}
               />
             </div>
           </div>
         </div>
       </div>
       <div className="container">
+        <div className="row justify-content-between">
+          <div className="col text-center">
+            <ul className="list-inline mb-0">
+              <li className="list-inline-item me-4">
+                <p className="mb-0">
+                  <strong
+                    dangerouslySetInnerHTML={{
+                      __html: newLineText(genus[0]),
+                    }}
+                  />
+                </p>
+              </li>
+              <li className="list-inline-item me-4">
+                Ht: {(data1.height * 0.3280839895).toFixed(2)} ft
+              </li>
+              <li className="list-inline-item me-4">
+                Wt: {(data1.weight * 0.220462).toFixed(1)} lbs
+              </li>
+            </ul>
+          </div>
+        </div>
         <div className="row">
           <div className="col text-center">
-            {data2.flavor_text_entries
-              .filter((entry) => entry.language.name === "en")
-              .filter((version) => version.version.name === "red")
-              .map((text) => (
-                <p
-                  key={text.version.name}
-                  dangerouslySetInnerHTML={{
-                    __html: newLineText(text.flavor_text),
-                  }}
-                />
-              ))}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: newLineText(exerpt[0]),
+              }}
+              className="mb-5"
+            />
             {/* <p
               dangerouslySetInnerHTML={{
                 __html: newLineText(data2.flavor_text_entries[0].flavor_text),
