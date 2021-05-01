@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Speech from "speak-tts";
 import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
+import Evolution from "../components/pokemon/Evolution";
 import Types from "../components/Types";
 
 import { useRequest } from "../hooks/useRequest";
@@ -132,6 +133,9 @@ const Pokemon = (props) => {
             /> */}
           </div>
         </div>
+        {/* Start Evolution */}
+        <Evolution apiPath={data2.evolution_chain.url} />
+        {/* End Evolution */}
         {/* Start Stats */}
         <div className="row row-cols-1 row-cols-md-2">
           <div className="col">
