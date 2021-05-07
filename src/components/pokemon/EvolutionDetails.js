@@ -22,15 +22,7 @@ const EvolutionDetails = (props) => {
     trade_species,
     turn_upside_down,
   } = props.details;
-  // let itemSrc;
-  // switch (item.name) {
-  //   case "water-stone":
-  //     itemSrc = { WaterStone };
-  //     break;
-  //   default:
-  //     return null;
-  // }
-  console.log(item);
+  // console.log(props.details);
   return (
     <div>
       <ul className="list-unstyled m-0">

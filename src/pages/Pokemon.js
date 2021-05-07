@@ -5,6 +5,7 @@ import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
 import Evolution from "../components/pokemon/Evolution";
 // import EvolutionTest from "../components/pokemon/EvolutionTest";
+import Learnset from "../components/pokemon/Learnset";
 import Types from "../components/Types";
 
 import { useRequest } from "../hooks/useRequest";
@@ -153,6 +154,13 @@ const Pokemon = (props) => {
           </div>
         </div>
         {/* End Stats */}
+        {/* Start Moves */}
+        <div className="row">
+          <div className="col">
+            <Learnset moves={data1.moves} />
+          </div>
+        </div>
+        {/* End Moves */}
       </div>
     </>
   );
