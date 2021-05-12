@@ -78,7 +78,13 @@ const Pokemon = (props) => {
                 </p>
                 <div className="d-flex flex-column align-items-end">
                   <h1 className="mb-0 ms-2 text-capitalize">{name}</h1>
-                  <Types keyName={name} type={data1.types} />
+                  <ul className="list-inline mb-0 d-flex">
+                    {data1.types.map((type) => (
+                      <li key={type.type.name} className="list-inline-item">
+                        <Types type={type.type.name} />
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -157,6 +163,7 @@ const Pokemon = (props) => {
         {/* Start Moves */}
         <div className="row">
           <div className="col">
+            <h3>Learnset</h3>
             <Learnset moves={data1.moves} />
           </div>
         </div>

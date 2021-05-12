@@ -12,26 +12,11 @@ import "./Type.scss";
 //   require.context("../assets/types", false, /\.(svg)$/)
 // );
 
-const Types = ({ type, keyName }) => {
+const Types = (props) => {
   return (
-    <ul className="list-inline mb-0 d-flex">
-      {type.map((r) => (
-        <li className="list-inline-item" key={keyName + r.type.name}>
-          {/* {images[`${r.type.name}.svg`]}
-          {r.type.name} */}
-          <div
-            className={`rounded-circle p-3 ${r.type.name} type-icon d-flex align-items-center justify-content-center`}
-          >
-            {/* <object
-              data={images[`./${r.type.name}.svg`].default}
-              aria-label={r.type.name}
-              width={15}
-              height={15}
-            /> */}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div
+      className={`rounded-circle p-3 ${props.type} type-icon d-flex align-items-center justify-content-center`}
+    />
   );
 };
 
