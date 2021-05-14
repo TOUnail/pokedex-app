@@ -16,27 +16,6 @@ const Move = (props) => {
         <td>Loading...</td>
       </tr>
     );
-  // let tmHm;
-  // if (props.machine) {
-  //   let machineUrl = data.machines[0].machine.url;
-  //   tmHm = machineUrl
-  //     .slice(0, -1)
-  //     .replace("https://pokeapi.co/api/v2/machine/", "");
-  //   const { machineData, machineError } = useRequest("/machine", tmHm);
-  //   if (machineError)
-  //   return (
-  //     <tr>
-  //       <td>Something went wrong</td>
-  //     </tr>
-  //   );
-  //   if (!machineData)
-  //     return (
-  //       <tr>
-  //         <td>Loading...</td>
-  //       </tr>
-  //     );
-  // }
-  // console.log(data);
   return (
     <>
       <tr>
@@ -46,7 +25,11 @@ const Move = (props) => {
           <Types type={data.type.name} />
         </td>
         <td>{data.power === null ? String.fromCharCode(8212) : data.power}</td>
-        <td>{data.accuracy}%</td>
+        <td>
+          {data.accuracy === null
+            ? String.fromCharCode(8212)
+            : `${data.accuracy}%`}
+        </td>
         <td>{data.pp}</td>
       </tr>
     </>
