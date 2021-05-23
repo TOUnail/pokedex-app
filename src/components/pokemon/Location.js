@@ -88,10 +88,10 @@ const Location = (props) => {
     { name: "White 2", areas: white2.length > 0 ? white2 : [] },
     { name: "X", areas: x.length > 0 ? x : [] },
     { name: "Y", areas: y.length > 0 ? y : [] },
-    { name: "Soul silver", areas: soulSilver.length > 0 ? soulSilver : [] },
-    { name: "Heart gold", areas: heartGold.length > 0 ? heartGold : [] },
-    { name: "Fire red", areas: fireRed.length > 0 ? fireRed : [] },
-    { name: "Leaf green", areas: leafGreen.length > 0 ? leafGreen : [] },
+    { name: "Soul Silver", areas: soulSilver.length > 0 ? soulSilver : [] },
+    { name: "Heart Gold", areas: heartGold.length > 0 ? heartGold : [] },
+    { name: "Fire Red", areas: fireRed.length > 0 ? fireRed : [] },
+    { name: "Leaf Green", areas: leafGreen.length > 0 ? leafGreen : [] },
   ];
   return (
     <table className="table table-borderless">

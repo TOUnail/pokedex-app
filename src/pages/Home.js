@@ -28,6 +28,10 @@ const Home = () => {
     (size > 0 && data && typeof data[size - 1] === "undefined");
   const isEmpty = data?.[0]?.length === 0;
   const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 20);
+
+  const searchSubmit = (term) => {
+    console.log(term);
+  };
   // useEffect(() => {
   //   if (isVisible && !isReachingEnd) {
   //     setSize(size + 1);
@@ -35,7 +39,7 @@ const Home = () => {
   // }, [isVisible]); // eslint-disable-line
   return (
     <>
-      <Header />
+      <Header searchTerm={searchSubmit} />
       <div className="container-md home-container">
         <div className="row row-cols-1 row-cols-md-3 gx-0 g-lg-3">
           {result.map((r) =>

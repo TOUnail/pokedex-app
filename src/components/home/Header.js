@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Header = () => {
+const Header = (props) => {
+  // let textInput = createRef;
+  const [searchQuery, setSearchQuery] = useState("");
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    props.searchTerm(searchQuery);
+  };
   return (
     <header className="header fixed-top">
       <div className="container py-3">
@@ -11,12 +17,15 @@ const Header = () => {
         </div>
         <div className="row">
           <div className="col">
-            <input
-              className="form-control rounded-pill input-search"
-              // style={{ backgroundColor: "rgba(204,204,204,0.9)" }}
-              type="text"
-              placeholder="Search"
-            />
+            <form onSubmit={onSearchSubmit}>
+              <input
+                className="form-control rounded-pill input-search"
+                // style={{ backgroundColor: "rgba(204,204,204,0.9)" }}
+                type="text"
+                placeholder="Search"
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </form>
           </div>
         </div>
       </div>
