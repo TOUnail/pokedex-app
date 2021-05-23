@@ -1,5 +1,5 @@
 import React from "react";
-import { useRequest } from "../../hooks/useRequest";
+import { useRequest } from "../../../hooks/useRequest";
 const EvolutionProfile = (props) => {
   const name = props.pokemon;
   const { data, error } = useRequest("/pokemon", name);

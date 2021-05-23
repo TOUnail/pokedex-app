@@ -80,3 +80,10 @@
     max-width: 24px;
     height: auto;
 }
+
+.learnset > thead > tr > th:first-child {
+  width: 85px;
+  @media (min-width: 992px) {
+    width: 120px;
+  }
+}

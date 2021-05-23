@@ -1,8 +1,8 @@
 import React from "react";
-import GetMachine from "./GetMachine";
-import Types from "../Types";
-import { useRequest } from "../../hooks/useRequest";
-import { getLastSectionEndpoint } from "../../util/organizeMoves";
+import GetMachine from "../../../util/GetMachine";
+import Types from "../../Types";
+import { useRequest } from "../../../hooks/useRequest";
+import { getLastSectionEndpoint } from "../../../util/organizeMoves";
 
 const MachineMove = (props) => {
   const { data: moveData, error: moveError } = useRequest("/move", props.move);

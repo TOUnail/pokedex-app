@@ -1,5 +1,5 @@
 import React from "react";
-import { stoneToImage } from "../../util/stoneToImage";
+import { stoneToImage } from "../../../util/stoneToImage";
 
 const EvolutionDetails = (props) => {
   // console.log(props);

@@ -2,7 +2,7 @@ import React from "react";
 import EvolutionProfile from "./EvolutionProfile";
 import EvolutionDetails from "./EvolutionDetails";
 
-import { useRequest } from "../../hooks/useRequest";
+import { useRequest } from "../../../hooks/useRequest";
 
 const Evolution = (props) => {
   let splitUrl = props.apiPath.split("/");

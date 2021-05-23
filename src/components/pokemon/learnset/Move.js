@@ -1,6 +1,6 @@
 import React from "react";
-import { useRequest } from "../../hooks/useRequest";
-import Types from "../Types";
+import { useRequest } from "../../../hooks/useRequest";
+import Types from "../../Types";
 
 const Move = (props) => {
   const { data, error } = useRequest("/move", props.move);

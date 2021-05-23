@@ -1,11 +1,13 @@
 import React from "react";
+// import Context from "../context/Context";
 import { useHistory } from "react-router-dom";
 import Speech from "speak-tts";
 import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
-import Evolution from "../components/pokemon/Evolution";
+import Location from "../components/pokemon/Location";
+import Evolution from "../components/pokemon/evolution/Evolution";
 // import EvolutionTest from "../components/pokemon/EvolutionTest";
-import Learnset from "../components/pokemon/Learnset";
+import Learnset from "../components/pokemon/learnset/Learnset";
 import Types from "../components/Types";
 
 import { useRequest } from "../hooks/useRequest";
@@ -52,6 +54,8 @@ const Pokemon = (props) => {
   // console.log(data1);
   // console.log(data2);
   return (
+    // <Context.Consumer>
+    //   {(value) => (
     <>
       <div className={`masthead ${data1.types[0].type.name}`}>
         <div className="container">
@@ -74,7 +78,10 @@ const Pokemon = (props) => {
             <div className="col text-end">
               <div className="d-flex justify-content-end align-items-baseline">
                 <p className="mb-0 text-muted">
-                  #{data1.id.toLocaleString("en", { minimumIntegerDigits: 3 })}
+                  #
+                  {data1.id.toLocaleString("en", {
+                    minimumIntegerDigits: 3,
+                  })}
                 </p>
                 <div className="d-flex flex-column align-items-end">
                   <h1 className="mb-0 ms-2 text-capitalize">{name}</h1>
@@ -150,6 +157,8 @@ const Pokemon = (props) => {
           <div className="col">
             <h3>Base Stats</h3>
             <Stats data={data1.stats} />
+            <h3>Where to find</h3>
+            <Location data={name} />
           </div>
           <div className="col">
             <h3>Abilities</h3>
@@ -157,19 +166,15 @@ const Pokemon = (props) => {
             {data1.abilities.map((ability) => (
               <Abilities key={ability.ability.url} data={ability} />
             ))}
-          </div>
-        </div>
-        {/* End Stats */}
-        {/* Start Moves */}
-        <div className="row">
-          <div className="col">
+
             <h3>Learnset</h3>
             <Learnset moves={data1.moves} />
           </div>
         </div>
-        {/* End Moves */}
       </div>
     </>
+    //   )}
+    // </Context.Consumer>
   );
 };
 

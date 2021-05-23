@@ -1,5 +1,5 @@
 import React from "react";
-import { useRequest } from "../../hooks/useRequest";
+import { useRequest } from "../hooks/useRequest";
 
 const GetMachine = (props) => {
   const { data, error } = useRequest("/machine", props.number);
