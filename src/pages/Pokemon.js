@@ -1,6 +1,7 @@
 import React from "react";
 // import Context from "../context/Context";
 import { useHistory } from "react-router-dom";
+// import { GetSpecies } from "../util/GetSpecies";
 import Speech from "speak-tts";
 import Stats from "../components/pokemon/Stats";
 import Abilities from "../components/pokemon/Abilities";
@@ -10,12 +11,15 @@ import Evolution from "../components/pokemon/evolution/Evolution";
 import Learnset from "../components/pokemon/learnset/Learnset";
 import Types from "../components/Types";
 
-import { useRequest } from "../hooks/useRequest";
+import { useRequestFullInfo } from "../hooks/useRequest";
 import "../components/pokemon/Pokemon.scss";
 // tts example
 // https://codesandbox.io/s/rmloxx60q4?file=/src/index.js
 const Pokemon = (props) => {
   const name = props.match.params.name;
+
+  const { data } = useRequestFullInfo(name);
+
   const speech = new Speech();
   speech.init({
     volume: 0.5,
@@ -30,14 +34,19 @@ const Pokemon = (props) => {
       history.push("/");
     }
   };
-  const { data: data1, error: error1 } = useRequest("/pokemon", name);
-  const { data: data2, error: error2 } = useRequest("/pokemon-species", name);
-  if (error1 || error2) return <p>Something went wrong.</p>;
-  if (!data1 || !data2) return null;
-  let genus = data2.genera
+
+  // console.log(data);
+  // const { data: data, error: error2 } = useRequest("/pokemon-species", name);
+  // let defaultName = data.varieties.find((variety) => variety.is_default);
+  // const { data: data, error: error1 } = useRequestFullUrl(
+  //   defaultName.pokemon.url
+  // );
+  // if (error) {return <p>Something went wrong.</p>};
+  if (!data) return null;
+  let genus = data.genera
     .filter((entry) => entry.language.name === "en")
     .map((text) => text.genus);
-  let exerpt = data2.flavor_text_entries
+  let exerpt = data.flavor_text_entries
     .filter((entry) => entry.language.name === "en")
     .map((text) => text.flavor_text);
   const newLineText = (text) => {
@@ -47,17 +56,22 @@ const Pokemon = (props) => {
   const onClickSpeak = () => {
     speech
       .speak({
-        text: `${name}, a ${genus[0]}. ${exerpt[0]}`,
+        text: `${name.replace("etchd", "etched")}, a ${genus[0].replace(
+          "Evolution",
+          "avolution"
+        )}. ${exerpt[0]
+          .replace("POKéMON", "Pokemon")
+          .replace("etch’d", "etched")
+          .replace("evolution", "avolution")}`,
       })
       .catch((e) => console.log("error:", e));
   };
-  // console.log(data1);
-  // console.log(data2);
+  // console.log(data);
   return (
     // <Context.Consumer>
     //   {(value) => (
     <>
-      <div className={`masthead ${data1.types[0].type.name}`}>
+      <div className={`masthead ${data.types[0].type.name}`}>
         <div className="container">
           <header className="row align-items-center justify-content-between">
             <div className="col">
@@ -79,14 +93,14 @@ const Pokemon = (props) => {
               <div className="d-flex justify-content-end align-items-baseline">
                 <p className="mb-0 text-muted">
                   #
-                  {data1.id.toLocaleString("en", {
+                  {data.id.toLocaleString("en", {
                     minimumIntegerDigits: 3,
                   })}
                 </p>
                 <div className="d-flex flex-column align-items-end">
                   <h1 className="mb-0 ms-2 text-capitalize">{name}</h1>
                   <ul className="list-inline mb-0 d-flex">
-                    {data1.types.map((type) => (
+                    {data.types.map((type) => (
                       <li key={type.type.name} className="list-inline-item">
                         <Types type={type.type.name} />
                       </li>
@@ -102,7 +116,7 @@ const Pokemon = (props) => {
               <img
                 width={250}
                 height={250}
-                src={data1.sprites["front_default"]}
+                src={data.sprites["front_default"]}
                 alt={name}
                 style={{ imageRendering: "pixelated" }}
                 onClick={onClickSpeak}
@@ -125,10 +139,10 @@ const Pokemon = (props) => {
                 </p>
               </li>
               <li className="list-inline-item me-4">
-                Ht: {(data1.height * 0.3280839895).toFixed(2)} ft
+                Ht: {(data.height * 0.3280839895).toFixed(2)} ft
               </li>
               <li className="list-inline-item me-4">
-                Wt: {(data1.weight * 0.220462).toFixed(1)} lbs
+                Wt: {(data.weight * 0.220462).toFixed(1)} lbs
               </li>
             </ul>
           </div>
@@ -141,34 +155,25 @@ const Pokemon = (props) => {
               }}
               className="mb-5"
             />
-            {/* <p
-              dangerouslySetInnerHTML={{
-                __html: newLineText(data2.flavor_text_entries[0].flavor_text),
-              }}
-            /> */}
           </div>
         </div>
-        {/* Start Evolution */}
-        <Evolution apiPath={data2.evolution_chain.url} />
-        {/* <EvolutionTest /> */}
-        {/* End Evolution */}
-        {/* Start Stats */}
+        <Evolution apiPath={data.evolution_chain.url} />
         <div className="row row-cols-1 row-cols-md-2">
           <div className="col">
             <h3>Base Stats</h3>
-            <Stats data={data1.stats} />
+            <Stats data={data.stats} />
             <h3>Where to find</h3>
             <Location data={name} />
           </div>
           <div className="col">
             <h3>Abilities</h3>
 
-            {data1.abilities.map((ability) => (
+            {data.abilities.map((ability) => (
               <Abilities key={ability.ability.url} data={ability} />
             ))}
 
             <h3>Learnset</h3>
-            <Learnset moves={data1.moves} />
+            <Learnset moves={data.moves} />
           </div>
         </div>
       </div>

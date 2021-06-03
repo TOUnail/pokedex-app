@@ -5,7 +5,7 @@
     -webkit-backdrop-filter: blur( $blur );
     // border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
-
+$enable-negative-margins: true;
 @import "../node_modules/bootstrap";
 @media (max-width: 767px) {
     .home-container {padding-left: 0;padding-right:0;}

@@ -10,3 +10,25 @@ export const useRequest = (path, name) => {
   const { data, error } = useSWR(url);
   return { data, error };
 };
+
+export const useRequestFullUrl = (url) => {
+  const { data, error } = useSWR(url);
+  return { data, error };
+};
+
+export const useRequestFullInfo = (name) => {
+  const { data: data1, error: error1 } = useSWR(
+    `${baseUrl}/pokemon-species/${name}`
+  );
+  let defaultPokemon = data1?.varieties.find((variety) => variety.is_default);
+  const { data: data2, error: error2 } = useSWR(
+    () => defaultPokemon.pokemon.url
+  );
+  if (error1 || error2) console.log("Something went wrong");
+  let result = {
+    data: { ...data1, ...data2 },
+    error: { ...error1, ...error2 },
+  };
+  if (!data2) return "...loading";
+  return result;
+};

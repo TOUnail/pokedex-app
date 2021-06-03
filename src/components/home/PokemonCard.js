@@ -9,7 +9,9 @@ const PokemonCard = ({ pokemon }) => {
     setImgLoading(false);
   };
   const { name } = pokemon;
-  const { data, error } = useRequest("/pokemon", name);
+  const index = pokemon.url.split("/").filter(Boolean).pop();
+  // console.log(index);
+  const { data, error } = useRequest("/pokemon", index);
   if (error) return <p>Something went wrong.</p>;
   if (!data) return null;
   return (

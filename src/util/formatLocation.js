@@ -7,7 +7,7 @@ export const formatLocation = (location) => {
     result = `<p class="text-capitalize mb-0">${location
       .map((loc) => loc.replace(/-/g, " ").replace(" area", ""))
       .join("</p><p class='text-capitalize mb-0'>")}</p>`;
-    console.log(result);
+    // console.log(result);
   }
   return result;
 };
