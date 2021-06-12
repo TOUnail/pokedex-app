@@ -35,3 +35,22 @@
     padding-top: 97px;
     padding-bottom: 53px;
 }
+
+.gen-navigation {
+    left: 16%;
+    @media (min-width: 576px) {
+        left: 20%
+    }
+    @media (min-width: 768px) {
+        left: 27%
+    }
+    @media (min-width: 992px) {
+        left: 33%
+    }
+    @media (min-width: 1200px) {
+        left: 36%
+    }
+    @media (min-width: 1400px) {
+        left: 37.5%
+    }
+}
