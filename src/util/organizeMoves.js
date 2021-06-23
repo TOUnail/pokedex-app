@@ -1,4 +1,6 @@
 export const lvlUpMoves = (moves, generation) => {
+  // let version = GenerationVersion(generation);
+  // console.log(version);
   let results = moves.filter((move) =>
     move.version_group_details.some(
       (r) =>

@@ -17,8 +17,14 @@ export const useRequestFullUrl = (url) => {
 };
 
 export const useRequestFullInfo = (name) => {
+  let nonGMaxName;
+  if (name.includes("-gmax")) {
+    nonGMaxName = name.replace("-gmax", "");
+  }
   const { data: data1, error: error1 } = useSWR(
-    `${baseUrl}/pokemon-species/${name}`
+    `${baseUrl}/pokemon-species/${
+      nonGMaxName !== undefined ? nonGMaxName : name
+    }`
   );
   let defaultPokemon = data1?.varieties.find((variety) => variety.is_default);
   const { data: data2, error: error2 } = useSWR(

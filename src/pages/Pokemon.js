@@ -1,5 +1,5 @@
-import React from "react";
-// import Context from "../context/Context";
+import React, { useContext } from "react";
+import Context from "../context/Context";
 import { useHistory } from "react-router-dom";
 // import { GetSpecies } from "../util/GetSpecies";
 import Speech from "speak-tts";
@@ -11,13 +11,17 @@ import Evolution from "../components/pokemon/evolution/Evolution";
 import Learnset from "../components/pokemon/learnset/Learnset";
 import Types from "../components/Types";
 
-import { useRequestFullInfo } from "../hooks/useRequest";
+import { useRequest, useRequestFullInfo } from "../hooks/useRequest";
 import "../components/pokemon/Pokemon.scss";
 // tts example
 // https://codesandbox.io/s/rmloxx60q4?file=/src/index.js
 const Pokemon = (props) => {
   const name = props.match.params.name;
-
+  const pokeContext = useContext(Context);
+  const { data: data1 } = useRequest(
+    "/generation",
+    pokeContext.generation === "all" ? 8 : pokeContext.generation
+  );
   const { data } = useRequestFullInfo(name);
 
   const speech = new Speech();
@@ -43,11 +47,14 @@ const Pokemon = (props) => {
   // );
   // if (error) {return <p>Something went wrong.</p>};
   if (!data) return null;
+  if (!data1) return null;
+
   let genus = data.genera
     .filter((entry) => entry.language.name === "en")
     .map((text) => text.genus);
   let exerpt = data.flavor_text_entries
     .filter((entry) => entry.language.name === "en")
+    //.filter((version) => version.name === "red")
     .map((text) => text.flavor_text);
   const newLineText = (text) => {
     const newText = text.replace("\n", " ").replace("\f", " ");
@@ -59,13 +66,14 @@ const Pokemon = (props) => {
         text: `${name.replace("etchd", "etched")}, a ${genus[0].replace(
           "Evolution",
           "avolution"
-        )}. ${exerpt[0]
+        )}. ${exerpt[exerpt.length - 1]
           .replace("POKéMON", "Pokemon")
           .replace("etch’d", "etched")
           .replace("evolution", "avolution")}`,
       })
       .catch((e) => console.log("error:", e));
   };
+  // console.log(exerpt[exerpt.length - 1]);
   // console.log(data);
   return (
     // <Context.Consumer>
@@ -151,7 +159,7 @@ const Pokemon = (props) => {
           <div className="col text-center">
             <p
               dangerouslySetInnerHTML={{
-                __html: newLineText(exerpt[0]),
+                __html: newLineText(exerpt[exerpt.length - 1]),
               }}
               className="mb-5"
             />
@@ -173,7 +181,7 @@ const Pokemon = (props) => {
             ))}
 
             <h3>Learnset</h3>
-            <Learnset moves={data.moves} />
+            <Learnset version={data1.version_groups} moves={data.moves} />
           </div>
         </div>
       </div>

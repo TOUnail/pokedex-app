@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Type from "../Types";
+import Types from "../Types";
 import { Link } from "react-router-dom";
 import { useRequest } from "../../hooks/useRequest";
 
@@ -50,8 +50,13 @@ const PokemonCard = ({ pokemon }) => {
                 </span>
               </p>
             </div>
-
-            <Type keyName={name} type={data.types} />
+            <ul className="list-inline mb-0 d-flex">
+              {data.types.map((type) => (
+                <li key={type.type.name} className="list-inline-item">
+                  <Types type={type.type.name} />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Link>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Context from "../../context/Context";
 
-const Footer = () => {
+const Footer = (props) => {
   const [active, setActive] = useState(false);
   const handleClick = () => {
     setActive(!active);
@@ -104,7 +104,8 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen1");
+                          context.setGen(1);
+                          setActive(false);
                         }}
                       >
                         1
@@ -116,7 +117,8 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen2");
+                          context.setGen(2);
+                          setActive(false);
                         }}
                       >
                         2
@@ -128,7 +130,8 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen3");
+                          context.setGen(3);
+                          setActive(false);
                         }}
                       >
                         3
@@ -140,7 +143,8 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen4");
+                          context.setGen(4);
+                          setActive(false);
                         }}
                       >
                         4
@@ -152,7 +156,8 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen5");
+                          context.setGen(5);
+                          setActive(false);
                         }}
                       >
                         5
@@ -164,12 +169,52 @@ const Footer = () => {
                         style={{ width: 30, height: 30 }}
                         onClick={(event) => {
                           event.preventDefault();
-                          context.setGen("gen6");
+                          context.setGen(6);
+                          setActive(false);
                         }}
                       >
                         6
                       </button>
                     </li>
+                    <li>
+                      <button
+                        className="rounded-circle btn btn-sm btn-primary border-0 px-0"
+                        style={{ width: 30, height: 30 }}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          context.setGen(7);
+                          setActive(false);
+                        }}
+                      >
+                        7
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="rounded-circle btn btn-sm btn-primary border-0 px-0"
+                        style={{ width: 30, height: 30 }}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          context.setGen(8);
+                          setActive(false);
+                        }}
+                      >
+                        8
+                      </button>
+                    </li>
+                    {/* <li>
+                      <button
+                        className="rounded-circle btn btn-sm btn-primary border-0 px-0"
+                        style={{ width: 30, height: 30 }}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          context.setGen(0);
+                          setActive(false);
+                        }}
+                      >
+                        all
+                      </button>
+                    </li> */}
                   </ul>
                 )}
               </div>
