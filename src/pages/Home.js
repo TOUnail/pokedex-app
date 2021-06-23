@@ -41,7 +41,7 @@ const Home = () => {
       break;
     case 5:
       apiOffset = 494;
-      apiLimit = 156;
+      apiLimit = 155;
       break;
     case 6:
       apiOffset = 649;

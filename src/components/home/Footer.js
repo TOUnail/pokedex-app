@@ -12,7 +12,7 @@ const Footer = (props) => {
         <footer className="footer fixed-bottom">
           <div className="container">
             <div className="row justify-content-around align-items-center">
-              <div className="col text-center">
+              {/* <div className="col text-center">
                 <svg version="1.1" height="24" width="24">
                   <path
                     fill="#231F20"
@@ -53,7 +53,7 @@ const Footer = (props) => {
                   </g>
                 </svg>
                 <p className="mb-0">moves</p>
-              </div>
+              </div> */}
               <div className="col text-center position-relative">
                 <svg
                   onClick={() => handleClick()}
