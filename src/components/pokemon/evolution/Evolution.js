@@ -10,7 +10,7 @@ const Evolution = (props) => {
   const { data, error } = useRequest("/evolution-chain", evolutionChain);
   if (error) return <p>Something went wrong</p>;
   if (!data) return <p>Loading...</p>;
-  let base = data.chain.species.name;
+  let base = data.chain.species;
   let firstEvolution =
     data.chain.evolves_to.length > 0 ? data.chain.evolves_to : undefined;
   let secondEvolution;
@@ -25,14 +25,14 @@ const Evolution = (props) => {
     <>
       <div className="row">
         <div className="col">
-          <h3>Evolution</h3>
+          <h3 className="h5 fw-bold text-center text-md-start">Evolution</h3>
         </div>
       </div>
       <div className="row justify-content-center align-items-stretch text-center">
         {firstEvolution ? (
           <>
             <div className="col align-self-center">
-              <EvolutionProfile pokemon={base} />
+              <EvolutionProfile pokemon={base.name} url={base.url} />
             </div>
             {/* Start Arrow */}
             <div className="col d-flex flex-column justify-content-around">
@@ -56,7 +56,10 @@ const Evolution = (props) => {
                 ? firstEvolution.map((pokemon) => (
                     <div key={pokemon.species.name} className="row">
                       <div className="col">
-                        <EvolutionProfile pokemon={pokemon.species.name} />
+                        <EvolutionProfile
+                          pokemon={pokemon.species.name}
+                          url={pokemon.species.url}
+                        />
                       </div>
                     </div>
                   ))
@@ -64,6 +67,7 @@ const Evolution = (props) => {
                     <EvolutionProfile
                       key={pokemon.species.name}
                       pokemon={pokemon.species.name}
+                      url={pokemon.species.url}
                     />
                   ))}
             </div>
@@ -91,7 +95,10 @@ const Evolution = (props) => {
                     ? secondEvolution.map((pokemon) => (
                         <div key={pokemon.species.name} className="row">
                           <div className="col">
-                            <EvolutionProfile pokemon={pokemon.species.name} />
+                            <EvolutionProfile
+                              pokemon={pokemon.species.name}
+                              url={pokemon.species.url}
+                            />
                           </div>
                         </div>
                       ))
@@ -99,6 +106,7 @@ const Evolution = (props) => {
                         <EvolutionProfile
                           key={pokemon.species.name}
                           pokemon={pokemon.species.name}
+                          url={pokemon.species.url}
                         />
                       ))}
                 </div>
@@ -107,7 +115,11 @@ const Evolution = (props) => {
           </>
         ) : (
           <div className="col text-center">
-            <p>does not evolve</p>
+            <div className="card pokemon-card text-center">
+              <div className="card-body">
+                <p className="mb-0">This Pokemon does not evolve.</p>
+              </div>
+            </div>
           </div>
         )}
       </div>

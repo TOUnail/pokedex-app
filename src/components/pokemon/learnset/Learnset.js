@@ -25,8 +25,8 @@ const Learnset = (props) => {
   // console.log(machineMoves);
   // console.log(allMoves);
   useEffect(() => {
-    console.log(generation);
-    console.log(allMoves);
+    // console.log(generation);
+    // console.log(allMoves);
     // console.log(props.version[0].name);
     setLvlMoves(lvlUpMoves(allMoves, generation));
     setMachMoves(machineMoves(allMoves, generation));
@@ -35,7 +35,9 @@ const Learnset = (props) => {
     <>
       {lvlMoves.length > 0 && (
         <>
-          <h5>By level</h5>
+          <h5>
+            <small>By level</small>
+          </h5>
           <table className="table table-hover table-sm align-middle learnset">
             <thead>
               <tr>
@@ -82,11 +84,13 @@ const Learnset = (props) => {
       )}
       {machMoves.length > 0 && (
         <>
-          <h5>By TM/HM</h5>
+          <h5>
+            <small>By TM/HM</small>
+          </h5>
           <table className="table table-hover table-sm align-middle learnset">
             <thead>
               <tr>
-                <th>TH/HM</th>
+                <th>TM/HM</th>
                 <th>Move</th>
                 <th>Type</th>
                 <th>Power</th>

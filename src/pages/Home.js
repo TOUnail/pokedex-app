@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useContext } from "react";
 import Header from "../components/home/Header";
 import Footer from "../components/home/Footer";
 import PokemonCard from "../components/home/PokemonCard";
@@ -15,7 +15,7 @@ const Home = () => {
   // const { data: result, error } = useRequest("/pokemon");
   // if (error) return <p>Something went wrong.</p>;
   // if (!result) return <p>Loading...</p>;
-  const ref = useRef(null);
+  // const ref = useRef(null);
   const context = useContext(Context);
   let generation = context.generation;
   // console.log(generation);
@@ -36,7 +36,7 @@ const Home = () => {
       apiLimit = 135;
       break;
     case 4:
-      apiOffset = 387;
+      apiOffset = 386;
       apiLimit = 107;
       break;
     case 5:

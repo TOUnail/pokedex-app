@@ -7,7 +7,7 @@ const Abilities = (props) => {
   if (!data) return <p>Loading...</p>;
   // console.log(data);
   return (
-    <div className="card my-2">
+    <div className="card my-2 rounded-0 pokemon-card">
       <div className="card-body">
         <p className="text-capitalize">
           <strong>{props.data.ability.name}</strong>

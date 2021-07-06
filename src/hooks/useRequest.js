@@ -17,6 +17,7 @@ export const useRequestFullUrl = (url) => {
 };
 
 export const useRequestFullInfo = (name) => {
+  //TODO change name to pokemon number
   let nonGMaxName;
   if (name.includes("-gmax")) {
     nonGMaxName = name.replace("-gmax", "");

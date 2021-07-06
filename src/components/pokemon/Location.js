@@ -31,6 +31,7 @@ const Location = (props) => {
   if (!data) {
     return "Loading";
   } else {
+    console.log(data);
     data.map((loc) =>
       loc.version_details.forEach((ver) => {
         if (ver.version.name === "diamond")

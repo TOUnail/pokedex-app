@@ -7,6 +7,7 @@ import leafStone from "../assets/stones/leaf-stone.png";
 import waterStone from "../assets/stones/water-stone.png";
 import thunderStone from "../assets/stones/thunder-stone.png";
 import moonStone from "../assets/stones/moon-stone.png";
+import sunStone from "../assets/stones/sun-stone.png";
 
 export const stoneToImage = (stone) => {
   switch (stone) {
@@ -72,6 +73,14 @@ export const stoneToImage = (stone) => {
           className="dusk-stone evolution-stone"
           src={duskStone}
           alt="dusk stone"
+        />
+      );
+    case "sun-stone":
+      return (
+        <img
+          className="sun-stone evolution-stone"
+          src={sunStone}
+          alt="sun stone"
         />
       );
     default:
